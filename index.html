@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CRS Door & Hardware</title>
+  <style>
+    :root {
+      --azul-oscuro: #14213D;
+      --rojo: #D62828;
+      --gris: #BDBDBD;
+      --fondo-claro: #f5f5f5;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: var(--fondo-claro);
+      color: #1a1a1a;
+      line-height: 1.6;
+    }
+
+    header {
+      background-color: var(--azul-oscuro);
+      color: white;
+      padding: 2rem 1rem;
+      text-align: center;
+    }
+
+    header img {
+      max-width: 120px;
+      display: block;
+      margin: 0 auto 1rem;
+    }
+
+    nav {
+      background-color: var(--rojo);
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      padding: 1rem;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s ease;
+    }
+
+    nav a:hover {
+      color: #ffe8e8;
+    }
+
+    section {
+      padding: 3rem 1rem;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .services, .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      margin-top: 1.5rem;
+    }
+
+    .service, .gallery img {
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      padding: 1.5rem;
+      text-align: center;
+      cursor: pointer;
+    }
+
+    .gallery img {
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+    }
+
+    .contact-info {
+      background-color: white;
+      padding: 2rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    footer {
+      background-color: var(--gris);
+      text-align: center;
+      padding: 1.5rem;
+      margin-top: 3rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="file:///C:/Users/donov/OneDrive/Im%C3%A1genes/CRS%20LOGO.jpg" alt="CRS Logo">
+    <h1>CRS Door & Hardware</h1>
+    <p>Soluciones en puertas y herrajes certificados</p>
+  </header>
+
+  <nav>
+    <a href="#inicio">Inicio</a>
+    <a href="#servicios">Servicios</a>
+    <a href="#conocenos">Conócenos</a>
+    <a href="#galeria">Galería</a>
+    <a href="#contacto">Contacto</a>
+  </nav>
+
+  <section id="inicio">
+    <h2>Bienvenidos a Crs Door and Hardware</h2>
+    <p>En Crs Door and Hardware nos especializamos en la venta e instalación de productos de alta calidad diseñados para satisfacer las exigencias de proyectos arquitectónicos, comerciales e industriales. Ofrecemos una amplia gama de soluciones, incluyendo puertas metálicas, puertas blindadas de nivel 2 y 3, herrajes para puertas certificados bajo norma UL, chutes de basura y particiones sanitarias para baño.</p>
+    <p>Nuestro equipo está conformado por técnicos capacitados que garantizan un trabajo preciso y alineado con los más altos estándares de calidad, seguridad y normativa. Además, ofrecemos servicios complementarios de pintura, asegurando un acabado profesional y duradero en cada proyecto.</p>
+    <p>En Crs Door and Hardware, trabajamos con compromiso, experiencia y responsabilidad para ser su aliado de confianza en la creación de espacios seguros, funcionales y estéticamente bien terminados.</p>
+  </section>
+
+  <section id="servicios">
+    <h2>Servicios</h2>
+    <div class="services">
+      <div class="service" onclick="location.href='#puertas-metalicas'">Puertas Metálicas</div>
+      <div class="service" onclick="location.href='#herrajes-puertas'">Herrajes para Puertas</div>
+      <div class="service" onclick="location.href='#blindadas'">Puertas Blindadas Nivel 2 y 3</div>
+      <div class="service" onclick="location.href='#instalacion-pintura'">Servicio de Instalación y Pintura</div>
+      <div class="service" onclick="location.href='#chutes'">Chutes de Basura</div>
+      <div class="service" onclick="location.href='#particiones'">Particiones Sanitarias</div>
+    </div>
+  </section>
+
+  <section id="conocenos">
+    <h2>Conócenos</h2>
+    <p>CRS DOOR AND HARDWARE es una empresa que nace en el corazón de la capital San José Costa Rica, con el objetivo de ofrecer a las diferentes constructoras del país y de Centroamérica una opción factible no solo en accesorios, suministros y técnicas especiales en lo que son puertas de emergencia, corredizas, fijas entre otros servicios. CRS DOOR ofrece rapidez, confianza, responsabilidad y calidad en sus acabados.</p>
+  </section>
+
+  <section id="galeria">
+    <h2>Galería</h2>
+    <div class="gallery">
+      <img src="img1.jpg" alt="Proyecto 1" />
+      <img src="img2.jpg" alt="Proyecto 2" />
+      <img src="img3.jpg" alt="Proyecto 3" />
+    </div>
+    <p style="text-align:center; margin-top: 1rem; font-size: 0.9rem;">Sube tus imágenes a la carpeta del repositorio para que se vean aquí.</p>
+  </section>
+
+  <section id="contacto">
+    <h2>Contacto</h2>
+    <div class="contact-info">
+      <p><strong>Hugo Bass Hernández</strong></p>
+      <p>Tel: +506 6378 7050</p>
+      <p>Email: <a href="mailto:gerentegeneral@crsdoorhardwarecr.com">gerentegeneral@crsdoorhardwarecr.com</a></p>
+      <p>País: San José, Costa Rica</p>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 CRS Door & Hardware - Todos los derechos reservados</p>
+  </footer>
+</body>
+</html>
+
