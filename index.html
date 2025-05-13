@@ -4,6 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>CRS Door & Hardware</title>
+  <!-- Font Awesome para íconos -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-pap2I0WyC0+dqk8zZkrrI7FcU3Q6Oq7qRYD+FZtYkW4kqkUkUR9jYxYwDg6SGFUGNPeKlEG2hvAaDR2GgFEa4g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <style>
     :root {
       --azul-oscuro: #14213D;
@@ -63,33 +65,49 @@
       margin: auto;
     }
 
-    .services, .gallery {
+    .gallery {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
       gap: 2rem;
       margin-top: 1.5rem;
     }
 
-    .service, .gallery img {
+    .gallery-item {
       background-color: white;
       border-radius: 8px;
       box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-      padding: 1.5rem;
       text-align: center;
-      cursor: pointer;
+      overflow: hidden;
+      position: relative;
     }
 
-    .gallery img {
+    .gallery-item img {
       width: 100%;
       height: auto;
-      object-fit: cover;
+      display: block;
     }
 
-    .contact-info {
-      background-color: white;
-      padding: 2rem;
-      border-radius: 8px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    .gallery-item h3 {
+      padding: 1rem;
+      font-size: 1rem;
+    }
+
+    .gallery-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(20, 33, 61, 0.85);
+      color: white;
+      padding: 1rem;
+      transform: translateY(100%);
+      transition: transform 0.3s ease;
+      font-size: 0.9rem;
+      text-align: left;
+    }
+
+    .gallery-item:hover .gallery-overlay {
+      transform: translateY(0);
     }
 
     footer {
@@ -97,6 +115,95 @@
       text-align: center;
       padding: 1.5rem;
       margin-top: 3rem;
+    }
+
+    /* MODAL PROFESIONAL */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.6);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .modal-content {
+      background: linear-gradient(145deg, #ffffff, #f9f9f9);
+      border-radius: 12px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+      width: 90%;
+      max-width: 600px;
+      padding: 2.5rem 2rem;
+      position: relative;
+      animation: slideIn 0.4s ease;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: #14213D;
+    }
+
+    .modal-content h2 {
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+      border-bottom: 2px solid #D62828;
+      padding-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .modal-content h2::before {
+      content: "🔧";
+      font-size: 1.4rem;
+    }
+
+    .modal-content p,
+    .modal-content ul {
+      font-size: 1rem;
+      line-height: 1.6;
+      color: #333;
+      margin-bottom: 1rem;
+    }
+
+    .modal-content ul {
+      padding-left: 1.5rem;
+      list-style: disc;
+    }
+
+    .modal-content a {
+      color: #D62828;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .modal-content a:hover {
+      text-decoration: underline;
+    }
+
+    .close {
+      position: absolute;
+      right: 1rem;
+      top: 1rem;
+      font-size: 1.5rem;
+      color: #D62828;
+      cursor: pointer;
+      transition: transform 0.2s ease, color 0.2s ease;
+    }
+
+    .close:hover {
+      transform: scale(1.2);
+      color: #a00000;
+    }
+
+    @keyframes slideIn {
+      from { transform: translateY(-30px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
     }
   </style>
 </head>
@@ -109,60 +216,120 @@
 
   <nav>
     <a href="#inicio">Inicio</a>
-    <a href="#servicios">Servicios</a>
-    <a href="#conocenos">Conócenos</a>
-    <a href="#galeria">Galería</a>
-    <a href="#contacto">Contacto</a>
+    <a href="#" onclick="abrirModal('modal-servicios')">Servicios</a>
+    <a href="#" onclick="abrirModal('modal-conocenos')">Conócenos</a>
+    <a href="#" onclick="abrirModal('modal-contacto')">Contacto</a>
+    <a href="#" onclick="abrirModal('modal-redes')">Redes Sociales</a>
   </nav>
 
   <section id="inicio">
-    <h2>Bienvenidos a Crs Door and Hardware</h2>
-    <p>En Crs Door and Hardware nos especializamos en la venta e instalación de productos de alta calidad diseñados para satisfacer las exigencias de proyectos arquitectónicos, comerciales e industriales. Ofrecemos una amplia gama de soluciones, incluyendo puertas metálicas, puertas blindadas de nivel 2 y 3, herrajes para puertas certificados bajo norma UL, chutes de basura y particiones sanitarias para baño.</p>
-    <p>Nuestro equipo está conformado por técnicos capacitados que garantizan un trabajo preciso y alineado con los más altos estándares de calidad, seguridad y normativa. Además, ofrecemos servicios complementarios de pintura, asegurando un acabado profesional y duradero en cada proyecto.</p>
-    <p>En Crs Door and Hardware, trabajamos con compromiso, experiencia y responsabilidad para ser su aliado de confianza en la creación de espacios seguros, funcionales y estéticamente bien terminados.</p>
-  </section>
-
-  <section id="servicios">
-    <h2>Servicios</h2>
-    <div class="services">
-      <div class="service" onclick="location.href='#puertas-metalicas'">Puertas Metálicas</div>
-      <div class="service" onclick="location.href='#herrajes-puertas'">Herrajes para Puertas</div>
-      <div class="service" onclick="location.href='#blindadas'">Puertas Blindadas </div>
-      <div class="service" onclick="location.href='#instalacion-pintura'">Servicio de Instalación y Pintura</div>
-      <div class="service" onclick="location.href='#chutes'">Chutes de Basura</div>
-      <div class="service" onclick="location.href='#particiones'">Particiones Sanitarias</div>
-    </div>
-  </section>
-
-  <section id="conocenos">
-    <h2>Conócenos</h2>
-    <p>CRS DOOR AND HARDWARE es una empresa que nace en el corazón de la capital San José Costa Rica, con el objetivo de ofrecer a las diferentes constructoras del país y de Centroamérica una opción factible no solo en accesorios, suministros y técnicas especiales en lo que son puertas de emergencia, corredizas, fijas entre otros servicios. CRS DOOR ofrece rapidez, confianza, responsabilidad y calidad en sus acabados.</p>
+    <h2>Bienvenidos a CRS Door and Hardware</h2>
+    <p>En Crs Door and Hardware nos especializamos en la venta e instalación de productos de alta calidad diseñados para satisfacer las exigencias de proyectos arquitectónicos, comerciales e industriales...</p>
   </section>
 
   <section id="galeria">
-    <h2>Galería</h2>
+    <h2>Proyectos en los que hemos trabajado</h2>
     <div class="gallery">
-      <img src="Mc.jpg" alt="Proyecto 1" />
-      <h2> Mc Donals Proyecto</h2>
-      <img src="img2.jpg" alt="Proyecto 2" />
-      <img src="img3.jpg" alt="Proyecto 3" />
-    </div>
-    <p style="text-align:center; margin-top: 1rem; font-size: 0.9rem;">Sube tus imágenes a la carpeta del repositorio para que se vean aquí.</p>
-  </section>
-
-  <section id="contacto">
-    <h2>Contacto</h2>
-    <div class="contact-info">
-      <p><strong>Hugo Bass Hernández</strong></p>
-      <p>Tel: +506 6378 7050</p>
-      <p>Email: <a href="mailto:gerentegeneral@crsdoorhardwarecr.com">gerentegeneral@crsdoorhardwarecr.com</a></p>
-      <p>País: San José, Costa Rica</p>
+      <div class="gallery-item">
+        <img src="Mc.jpg" alt="Proyecto 1" />
+        <h3>Mc Donald's Proyecto</h3>
+        <div class="gallery-overlay">Puertas metálicas resistentes instaladas en sucursal McDonald's.</div>
+      </div>
+      <div class="gallery-item">
+        <img src="img2.jpg" alt="Proyecto 2" />
+        <h3>Proyecto 2</h3>
+        <div class="gallery-overlay">Puerta de emergencia con herrajes certificados UL.</div>
+      </div>
+      <div class="gallery-item">
+        <img src="img3.jpg" alt="Proyecto 3" />
+        <h3>Proyecto 3</h3>
+        <div class="gallery-overlay">Instalación de puerta corrediza para centro comercial.</div>
+      </div>
     </div>
   </section>
 
   <footer>
     <p>&copy; 2025 CRS Door & Hardware - Todos los derechos reservados</p>
   </footer>
+
+  <!-- MODALES -->
+
+  <!-- Conócenos -->
+  <div id="modal-conocenos" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="cerrarModal()">&times;</span>
+      <h2>Conócenos</h2>
+      <p>CRS DOOR AND HARDWARE es una empresa que nace en el corazón de la capital San José, Costa Rica...</p>
+    </div>
+  </div>
+
+  <!-- Servicios -->
+  <div id="modal-servicios" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="cerrarModal()">&times;</span>
+      <h2>Servicios</h2>
+      <ul>
+        <li><strong>Puertas Metálicas:</strong> resistentes, ideales para industrias y comercios.</li>
+        <li><strong>Herrajes Certificados:</strong> bajo normas UL y ANSI.</li>
+        <li><strong>Puertas Blindadas Nivel 2 y 3:</strong> seguridad de alto nivel.</li>
+        <li><strong>Instalación y Pintura:</strong> con acabado profesional.</li>
+        <li><strong>Chutes de basura:</strong> funcionalidad y resistencia.</li>
+        <li><strong>Particiones Sanitarias:</strong> diseño higiénico y duradero.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Contacto -->
+  <div id="modal-contacto" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="cerrarModal()">&times;</span>
+      <h2>Contacto</h2>
+      <p><strong>Hugo Bass Hernández</strong></p>
+      <p>Tel: +506 6378 7050</p>
+      <p>Email: <a href="mailto:gerentegeneral@crsdoorhardwarecr.com">gerentegeneral@crsdoorhardwarecr.com</a></p>
+      <p>País: San José, Costa Rica</p>
+    </div>
+  </div>
+
+  <!-- Redes Sociales -->
+  <div id="modal-redes" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="cerrarModal()">&times;</span>
+      <h2>Síguenos en redes sociales</h2>
+      <ul style="list-style: none; padding-left: 0;">
+        <li style="margin: 1rem 0;">
+          <i class="fab fa-instagram" style="color: #E1306C; margin-right: 10px;"></i>
+          <a href="https://www.instagram.com/crs.doorhardware" target="_blank">@crs.doorhardware</a>
+        </li>
+        <li style="margin: 1rem 0;">
+          <i class="fab fa-tiktok" style="color: #000000; margin-right: 10px;"></i>
+          <a href="https://www.tiktok.com/@crs.door.hardware" target="_blank">@crs.door.hardware</a>
+        </li>
+        <li style="margin: 1rem 0;">
+          <i class="fab fa-facebook" style="color: #1877F2; margin-right: 10px;"></i>
+          <a href="https://www.facebook.com/search/top?q=crs%20door%20%26%20hardware" target="_blank">crs door & hardware</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- JS para modales -->
+  <script>
+    function abrirModal(id) {
+      document.getElementById(id).style.display = 'flex';
+    }
+
+    function cerrarModal() {
+      document.querySelectorAll('.modal').forEach(m => m.style.display = 'none');
+    }
+
+    window.onclick = function(e) {
+      document.querySelectorAll('.modal').forEach(m => {
+        if (e.target === m) m.style.display = 'none';
+      });
+    };
+  </script>
 </body>
 </html>
+
 
